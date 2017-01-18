@@ -1,0 +1,10 @@
+{
+  "name": "poo-crud-clientes",
+  "version": "0.0.1",
+  "autoload" : {
+    "psr-4": {
+      "POO\\Pessoa\\": "src/POO/Pessoa/",
+      "App\\": "App/"
+    }
+  }
+}
