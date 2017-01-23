@@ -13,152 +13,65 @@
 <div class="content">
     <div class="row">
         <div class="large-12 columns">
-            <h1>Welcome to Foundation</h1>
+            <h1>POO</h1>
         </div>
     </div>
 
     <div class="row">
         <div class="large-12 columns">
             <div class="callout">
-                <h3>We&rsquo;re stoked you want to try Foundation! </h3>
-                <p>To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-                <p>Once you've exhausted the fun in this document, you should check out:</p>
+                <h3>Projeto part. 1</h3>
+                <ul>
+                    <li>Crie uma classe com os principais atributos que um cliente deve ter, como nome, cpf, endereço, etc.</li>
+                    <li>Crie um array de objetos de clientes, com 10 clientes dentro.</li>
+                    <li>Crie uma página e faça a listagem geral dos clientes. Quando clicar sobre o cliente, você deverá mostrar os dados específicos do cliente selecionado.</li>
+                    <li>Nessa listagem você também deverá ter a opção de ordenar os clientes pelo seu índice de forma ascendente e descendente.</li>
+                </ul>
+
                 <div class="row">
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</p>
-                    </div>
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://zurb.com/university/code-skills">Foundation Code Skills</a><br />These online courses offer you a chance to better understand how Foundation works and how you can master it to create awesome projects.</p>
-                    </div>
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://foundation.zurb.com/forum">Foundation Forum</a><br />Join the Foundation community to ask a question or show off your knowlege.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-4 medium-4 medium-push-2 columns">
-                        <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</p>
-                    </div>
-                    <div class="large-4 medium-4 medium-pull-2 columns">
-                        <p><a href="https://twitter.com/ZURBfoundation">@zurbfoundation</a><br />Ping us on Twitter if you have questions. When you build something with this we'd love to see it (and send you a totally boss sticker).</p>
-                    </div>
+                    <?php require "../App/clientes.php"; ?>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="large-8 medium-8 columns">
-            <h5>Here&rsquo;s your basic grid:</h5>
-            <!-- Grid Example -->
+        <div class="large-12 columns">
+            <table class="hover striped">
+                <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Nome</th>
+                    <th>Data Nascimento</th>
+                    <th>RG</th>
+                    <th>CPF/CNPJ</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ( $pessoas as $id => $pessoa ): ?>
+                    <tr>
+                        <td><?=$id;?></td>
+                        <td><a class="pessoa-<?=$id;?>" data-open="modalDadosCompletos" href="#<?=$id;?>"><?=$pessoa->getNome();?></a></td>
+                        <td><?=$pessoa->getDataNasc();?></td>
+                        <td><?=$pessoa->getRg();?></td>
+                        <td>
+                            <?php echo ( $pessoa instanceof \POO\Pessoa\Types\PessoaFisica ) ? $pessoa->getCpf() : $pessoa->getCnpj(); ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-            <div class="row">
-                <div class="large-12 columns">
-                    <div class="primary callout">
-                        <?php require "../App/clientes.php"; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-6 medium-6 columns">
-                    <div class="primary callout">
-                        <p>Six columns</p>
-                    </div>
-                </div>
-                <div class="large-6 medium-6 columns">
-                    <div class="primary callout">
-                        <p>Six columns</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-4 medium-4 small-4 columns">
-                    <div class="primary callout">
-                        <p>Four columns</p>
-                    </div>
-                </div>
-                <div class="large-4 medium-4 small-4 columns">
-                    <div class="primary callout">
-                        <p>Four columns</p>
-                    </div>
-                </div>
-                <div class="large-4 medium-4 small-4 columns">
-                    <div class="primary callout">
-                        <p>Four columns</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-
-            <h5>We bet you&rsquo;ll need a form somewhere:</h5>
-            <form>
+            <div class="reveal" id="modalDadosCompletos" data-reveal>
                 <div class="row">
-                    <div class="large-12 columns">
-                        <label>Input Label</label>
-                        <input type="text" placeholder="large-12.columns" />
+                    <div class="callout secondary">
+                        <p>Nome: <?= $pessoas[0]->getnome(); ?></p>
+                        <p>Data de Nascimento: <?= $pessoas[0]->getDataNasc(); ?></p>
+                        <p>RG: <?= $pessoas[0]->getRg(); ?></p>
+                        <p><?= ( $pessoas[0] instanceof \POO\Pessoa\Types\PessoaFisica ) ? "CPF: ".$pessoas[0]->getCpf() : "CNPJ: ".$pessoas[0]->getCnpj(); ?></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="large-4 medium-4 columns">
-                        <label>Input Label</label>
-                        <input type="text" placeholder="large-4.columns" />
-                    </div>
-                    <div class="large-4 medium-4 columns">
-                        <label>Input Label</label>
-                        <input type="text" placeholder="large-4.columns" />
-                    </div>
-                    <div class="large-4 medium-4 columns">
-                        <div class="row collapse">
-                            <label>Input Label</label>
-                            <div class="input-group">
-                                <input type="text" placeholder="small-9.columns" class="input-group-field" />
-                                <span class="input-group-label">.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Select Box</label>
-                        <select>
-                            <option value="husker">Husker</option>
-                            <option value="starbuck">Starbuck</option>
-                            <option value="hotdog">Hot Dog</option>
-                            <option value="apollo">Apollo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-6 medium-6 columns">
-                        <label>Choose Your Favorite</label>
-                        <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Radio 1</label>
-                        <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Radio 2</label>
-                    </div>
-                    <div class="large-6 medium-6 columns">
-                        <label>Check these out</label>
-                        <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-                        <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Textarea Label</label>
-                        <textarea placeholder="small-12.columns"></textarea>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="large-4 medium-4 columns">
-            <h5>Try one of these buttons:</h5>
-            <p><a href="#" class="button">Simple Button</a><br/>
-                <a href="#" class="success button">Success Btn</a><br/>
-                <a href="#" class="alert button">Alert Btn</a><br/>
-                <a href="#" class="secondary button">Secondary Btn</a></p>
-            <div class="callout">
-                <h5>So many components, girl!</h5>
-                <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
-                <a href="http://foundation.zurb.com/sites/docs/" class="small button">Go to Foundation Docs</a>
+                <a data-close class="button tiny align-right" href="#">Fechar</a>
             </div>
         </div>
     </div>
