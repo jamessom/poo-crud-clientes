@@ -24,4 +24,13 @@ class PessoaFisica extends Pessoa
         $this->cpf = $cpf;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function serializaObjeto()
+    {
+        $vars = array_merge(get_object_vars($this), parent::serializaObjeto());
+        return $vars;
+    }
 }

@@ -61,4 +61,12 @@ class Pessoa
         $this->rg = $rg;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function serializaObjeto()
+    {
+        return get_object_vars( $this );
+    }
 }

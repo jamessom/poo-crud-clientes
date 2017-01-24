@@ -24,31 +24,36 @@ $clientes     = array();
 $fornecedores = array();
 
 /**
- * Criação de pessoas dos tipos física e jurídica de forma aleatória
+ * Criação de pessoas do tipo física de forma aleatória
  */
-$flagCliente = 0;
-while( $flagCliente <= 4 ){
+$flagCliente = 1;
+while( $flagCliente <= 5 ){
 
     $cliente = new \POO\Pessoa\Types\PessoaFisica();
     $cliente->setNome( $arNomes[rand(0,9)] )
         ->setDataNasc( $arDtNasc[rand(0,9)] )
         ->setRg( $arRgs[rand(0,9)] )
         ->setCpf( $arCPF[rand(0,4)] );
-        array_push( $clientes, $cliente );
+        array_push( $clientes, $cliente->serializaObjeto() );
     $flagCliente++;
 }
 
-$flagFornecedor = 0;
-while( $flagFornecedor <= 4 ){
+/**
+ * Criação de pessoas do tipo jurídica de forma aleatória
+ */
+$flagFornecedor = 1;
+while( $flagFornecedor <= 5 ){
 
     $fornecedor = new \POO\Pessoa\Types\PessoaJuridica();
     $fornecedor->setNome( $arNomes[rand(0,9)] )
         ->setDataNasc( $arDtNasc[rand(0,9)] )
         ->setRg( $arRgs[rand(0,9)] )
         ->setCnpj( $arCNPJ[rand(0,4)] );
-    array_push( $fornecedores, $fornecedor );
+    array_push( $fornecedores, $fornecedor->serializaObjeto() );
     $flagFornecedor++;
 }
 
-
+/**
+ * Agrupa todas as pessoas.
+ */
 $pessoas = array_merge( $clientes, $fornecedores );
